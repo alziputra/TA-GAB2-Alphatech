@@ -53,6 +53,7 @@ class Hidangan extends Server
     // buat service "PUT"
     function service_put()
     {
+       
         // ambil parameter data yang akan di isi
         $data = array(
             "nama" => $this->put("nama"), //array $data[0]
@@ -60,10 +61,11 @@ class Hidangan extends Server
             "harga" => $this->put("harga"), //array $data[2]
             "foto" => $this->put("foto"), //array $data[3]
             "aktif" => $this->put("aktif"), //array $data[4]
-            "token" => base64_encode($this->put("nama")),
+            "token" => base64_encode($this->put("token")),
         );
         // panggil method "save data"
-        $hasil = $this->mHidang->update_data($data["nama"], $data["deskripsi"], $data["harga"], $data["foto"], $data["aktif"], $data["token"]);
+        $hasil = $this->mHidang->update_data($data["nama"], $data["deskripsi"]
+        , $data["harga"], $data["foto"], $data["aktif"], $data["token"]);
 
         // jika hasil = 0
         if ($hasil == 0) {
