@@ -12,8 +12,6 @@
 
     <!-- import file "style.css" -->
     <link rel="stylesheet" href="<?php echo base_url("ext/style.css") ?>" />
-
-
 </head>
 
 <body>
@@ -29,9 +27,8 @@
             <tr>
                 <!-- judul tabel -->
                 <th style="width: 5%" ;>No.</th>
-                <th style="width: 10%" ;>Nama</th>
+                <th style="width: 10%" ;>Menu</th>
                 <th style="width: 50%" ;>Harga</th>
-                <th style="width: 15%" ;>Foto</th>
                 <th style="width: 10%" ;>Aktif</th>
                 <th style="width: 10%" ;>Aksi</th>
             </tr>
@@ -39,30 +36,33 @@
 
         <!-- isi tabel -->
         <tbody>
-            <!-- proses looping data -->
-            <?php
-            // set nilai awal no
-            $no = 1;
-            foreach ($tampil->hidangan as $result) {
-            ?>
-                <tr>
-                    <td class="text-center"> <?php echo $no; ?></td>
-                    <td class="text-center"> <?php echo $result->nama_hidangan; ?></td>
-                    <td class="text-center"> <?php echo $result->harga_hidangan; ?></td>
-                    <td class="text-center"> <?php echo $result->foto_hidangan; ?></td>
-                    <td class="text-center"> <?php echo $result->aktif_hidangan; ?></td>
-                    <td class="text-center">
-                        <nav class="area-aksi">
-                            <button class="btn-ubah" id="btn_ubah" title="Ubah Data"><i class="fa-regular fa-pen-to-square"></i></button>
+        <!-- proses looping get data -->
+        <?php
+        $no = 1;
+        foreach ($tampil->hidangan as $result) {
+            // set nilai awal nomor
+        ?>
+            <tr>
+                <td class="text-center"><?= $no ?></td>
+                <td class="text-center"><?= $result->menu_hidangan ?></td>
+                <td class="text-center"><?= $result->harga_hidangan ?></td>
+                <td class="text-center"><?= $result->aktif_hidangan ?></td>
+                <td class="text-center">
+                    <nav class="area-aksi">
+                        <button class="btn-ubah" id="btn_ubah" title="Ubah Data" onclick="return gotoUpdate()">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button class="btn-hapus" id="btn_hapus" title="Hapus Data" onclick="return gotoDelete()">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </nav>
+                </td>
+            </tr>
 
-                            <button class="btn-hapus" id="btn_hapus" title="Hapus Data"><i class="fa-solid fa-trash-can"></i></button>
-                        </nav>
-                    </td>
-                </tr>
-            <?php
-                $no++;
-            }
-            ?>
+        <?php 
+        $no++;
+        } ?>
+        
         </tbody>
     </table>
 
