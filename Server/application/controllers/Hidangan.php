@@ -3,95 +3,140 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 // panggil file "Server.php"
 require APPPATH . "libraries/Server.php";
-// require APPPATH."libraries/Server.php";
 
 class Hidangan extends Server
 {
 
+    // membuat constructor untuk model
     public function __construct()
     {
         parent::__construct();
         // Your own constructor code
-
-        // // panggil model "Mhidangan"
-        $this->load->model("Mhidangan", "mHidang", TRUE);
+        $this->load->model("Mhidangan", "mdl", TRUE);
     }
 
-    // buat service "GET"
+    // keyword service_ ada di libraries/server line 684
+    // membuat fungsi GET
     function service_get()
     {
-        // panggil method "get_data"
-        $res = $this->mHidang->get_data();
-        // hasil respon
-        $this->response(array("hidangan" => $res), 200);
+        // ambil parameter token "(menu)"
+        $token = $this->delete("menu");
+
+        // test menggunakan menu
+        $menu = $this->get('menu');
+
+        // panggil model Mhidangan
+        // model itu alias ketika di panggil
+        // $this->load->model("Mhidangan", "model", TRUE);
+
+        if ($menu == '') {
+            // panggil fungsi get_data
+            $hidang = $this->mdl->get_data(base64_encode($token));
+            $this->response(array("hidangan" => $hidang), 200);
+        } else if ($menu != '') {
+            // query where
+            $this->db->where("menu", $menu);
+            // panggil fungsi get_data
+            $hidang = $this->mdl->get_data(base64_encode($token));
+            $this->response(array("hidangan" => $hidang), 200);
+        } else {
+            $this->response(array("status" => "Data Tidak Ditemukan"), 404);
+        }
     }
 
-    // buat service "POST"
+
+    // untuk get username
+    // function service_get()
+    // {
+    //     $username = $this->get("username");
+    //     $hasil = $this->model->get_data($username);
+
+    //     $this->response(array("auth" => $hasil), 200);
+    // }
+
+    // membuat fungsi POST
     function service_post()
     {
-        // ambil parameter data yang akan di isi
-        $data = array(
-            "nama" => $this->post("nama"), //array $data[0]
-            "deskripsi" => $this->post("deskripsi"), //array $data[1]
-            "harga" => $this->post("harga"), //array $data[2]
-            "foto" => $this->post("foto"), //array $data[3]
-            "aktif" => $this->post("aktif"), //array $data[4]
-            "token" => base64_encode($this->post("nama")),
-        );
-        // panggil method "save data"
-        $res = $this->mHidang->save_data($data["nama"], $data["deskripsi"], $data["harga"], $data["foto"], $data["aktif"], $data["token"]);
-        // jika hasil = 0
-        if ($res == 0) {
-            $this->response(array("status" => "Data Berhasil Disimpan"), 200);
-        }
-        // jika hasil !=0
-        else {
-            $this->response(array("status" => "Data Gagal Disimpan"), 200);
-        }
-    }
+        // panggil model hidangan
+        // $this->load->model("Mhidangan", "model", TRUE);
 
-    // buat service "PUT"
-    function service_put()
-    {
-       
         // ambil parameter data yang akan di isi
         $data = array(
-            "nama" => $this->put("nama"), //array $data[0]
-            "deskripsi" => $this->put("deskripsi"), //array $data[1]
-            "harga" => $this->put("harga"), //array $data[2]
-            "foto" => $this->put("foto"), //array $data[3]
-            "aktif" => $this->put("aktif"), //array $data[4]
-            "token" => base64_encode($this->put("token")),
+            "menu" => $this->post("menu"),
+            "deskripsi" => $this->post("deskripsi"),
+            "harga" => $this->post("harga"),
+            "aktif" => $this->post("aktif"),
+            "token" => base64_encode($this->post("menu"))
         );
-        // panggil method "save data"
-        $hasil = $this->mHidang->update_data($data["nama"], $data["deskripsi"]
-        , $data["harga"], $data["foto"], $data["aktif"], $data["token"]);
+
+        // array prosedural contoh
+        // $data["menu"] = $this->post("menu");
+        // $menu = $this->post("menu");
+
+        // panggil method save_data
+        // $hasil = $this->model->save_data();
+
+        $hasil = $this->mdl->save_data($data["menu"], $data["deskripsi"], $data["harga"], $data["aktif"], $data["token"]);
 
         // jika hasil = 0
         if ($hasil == 0) {
-            $this->response(array("status" => "Data Berhasil Di Update"), 200);
+            $this->response(array("status" => "Data Hidangan Berhasil di Simpan"), 200);
         }
         // jika hasil !=0
         else {
-            $this->response(array("status" => "Data Gagal Di Update"), 200);
+            $this->response(array("status" => "Data Hidangan Gagal di Simpan"), 200);
         }
     }
 
+    // membuat fungsi PUT
+    function service_put()
+    {
+        // panggil model hidangan
+        // $this->load->model("Mhidangan", "model", TRUE);
 
-    // buat service "DELETE"
+        // ambil parameter data yang akan di isi
+        $data = array(
+            "menu" => $this->put("menu"),
+            "deskripsi" => $this->put("deskripsi"),
+            "harga" => $this->put("harga"),
+            "aktif" => $this->put("aktif"),
+            "token" => base64_encode($this->put("token"))
+        );
+
+        // panggil method update_data
+        $hasil = $this->mdl->update_data($data["menu"], $data["deskripsi"], $data["harga"], $data["aktif"], $data["token"]);
+
+        // jika hasil = 0
+        if ($hasil == 0) {
+            // $hidang = $this->model->get_data();
+            // $this->response(array("hidangan" => $hidang), 200);
+            $this->response(array("status" => "Data Hidangan Berhasil di Update"), 200);
+        }
+        // jika hasil !=0
+        else {
+            $this->response(array("status" => "Data Hidangan Gagal di Update"), 200);
+        }
+    }
+
+    // membuat fungsi DELETE
     function service_delete()
     {
-        // ambil parameter token "nama"
-        $token = $this->delete("nama");
-        //    panggil fungsi "delete_data"
-        $res = $this->mHidang->delete_data(base64_encode($token));
-        if ($res == 1) {
-            $this->response(array("status" => "Data Berhasil Dihapus"), 200);
-        }
-        // jika proses delete gagal
-        else {
+        // panggil model hidangan
+        // $this->load->model("Mhidangan", "mdl", TRUe);
 
-            $this->response(array("status" => "Data Gagal Dihapus"), 200);
+        // ambil parameter token "(menu)"
+        $token = $this->delete("menu");
+
+        // panggil fungsi "delete_data"
+        $hasil = $this->mdl->delete_data(base64_encode($token));
+
+        // jika proses berhasil
+        if ($hasil == 1) {
+            $this->response(array("status" => "Data Hidangan Berhasil di Hapus"), 200);
+        }
+        // jika porses gagal
+        else {
+            $this->response(array("status" => "Data Hidangan Gagal di Hapus"), 200);
         }
     }
 }
