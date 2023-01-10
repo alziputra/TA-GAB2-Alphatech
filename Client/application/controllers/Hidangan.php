@@ -6,7 +6,9 @@ class Hidangan extends CI_Controller
 
 	public function index()
 	{
-		$data['tampil'] = json_decode($this->client->simple_get(APIHIDANGAN));
+		$data['tampil'] = json_decode(
+			$this->client->simple_get(APIHIDANGAN)
+		);
 
 		// foreach ($data["tampil"]->hidangan as $result) {
 		// 	# code...

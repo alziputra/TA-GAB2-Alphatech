@@ -1,15 +1,16 @@
 :root {
-    --th_table : #e3e3e3e3;
-    --set_padding : 5px;
-    --set_border : 1px solid #333333;
-    --putih : #ffffff;
-    --h-40 : 40px;
-    --w-120 : 120px;
+    --th_table: #e3e3e3e3;
+    --set_padding: 5px;
+    --set_border: 1px solid #b8b8b8;
+    --putih: #ffffff;
+    --h-40: 40px;
+    --w-120: 120px;
 }
 
-table {
-    width: 100%;
+.tbl-60 {
+    width: 60%;
     border-collapse: collapse;
+    margin: 5% 20% auto 20%;
 }
 
 th {
@@ -18,27 +19,27 @@ th {
     background: var(--th_table);
     /* proses perhitungan satuan unit css dengan dinamis / static */
     padding: calc(var(--set_padding)*2);
-    font-size: 1,5vw;
+    font-size: 1, 5vw;
 }
 
 td {
     background: var(--putih);
 }
 
-th, td {
+th,
+td {
     height: var(--h-40);
-    border: var(--set_border);
+    border-bottom: var(--set_border);
+}
+
+.text-center {
+    text-align: center;
 }
 
 .area-menu {
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
-    /* fungsi flex-direction untuk responsive */
-    /* align-items untuk flex cok */
-    /* align-items: center;
-    height: 300px;
-    background: #FFCC00; */
 }
 
 .btn-primary {
@@ -68,11 +69,12 @@ th, td {
 .area-aksi {
     width: 100%;
     display: flex;
+    gap: 4%;
 }
 
-.btn_ubah {
-    width: 48%;
-    margin-right: 2%;
+.btn-ubah {
+    width: 30%;
+    margin-left: 18%;
     border-radius: var(--set_padding);
     background: #EB6440;
     color: #FFFFFF;
@@ -82,9 +84,9 @@ th, td {
     outline: 0;
 }
 
-.btn_hapus {
-    width: 48%;
-    margin-left: 2%;
+.btn-hapus {
+    width: 30%;
+    margin-right: 18%;
     border-radius: var(--set_padding);
     background: #FFFFFF;
     color: #333333;
@@ -97,18 +99,27 @@ th, td {
 
 /* css untuk halaman entry mahasiswa cok */
 
-.item-label1, .item-input1, .item-error1,
-.item-label2, .item-input2, .item-error2,
-.item-label3, .item-input3, .item-error3,
-.item-label4, .item-input4, .item-error4 
-{
+.item-label1,
+.item-input1,
+.item-error1,
+.item-label2,
+.item-input2,
+.item-error2,
+.item-label3,
+.item-input3,
+.item-error3,
+.item-label4,
+.item-input4,
+.item-error4 {
     display: grid;
     min-height: 40px;
     align-items: center;
 }
 
-.item-label1, .item-label2, .item-label3, .item-label4
-{
+.item-label1,
+.item-label2,
+.item-label3,
+.item-label4 {
     justify-content: end;
 }
 
@@ -174,11 +185,11 @@ th, td {
 .area-grid {
     width: 100%;
     display: grid;
-    grid-template-areas: 
-    'label1 input1 input1 error1'
-    'label2 input2 input2 error2'
-    'label3 input3 input3 error3'
-    'label4 input4 input4 error4';
+    grid-template-areas:
+        'label1 input1 input1 error1'
+        'label2 input2 input2 error2'
+        'label3 input3 input3 error3'
+        'label4 input4 input4 error4';
     grid-gap: 10px;
     /* grid-template-columns: 1fr 1fr 1fr 1fr; */
     grid-auto-columns: 1fr;
@@ -186,7 +197,8 @@ th, td {
 
 
 /* styling input */
-.text-input, .select-input {
+.text-input,
+.select-input {
     border: var(--set_border);
     border-radius: calc(var(--set_padding)*3);
     height: calc(var(--set_padding)*5);
@@ -200,7 +212,8 @@ th, td {
 }
 
 /* pseudo class */
-.text-input:focus, .text-input:hover,
+.text-input:focus,
+.text-input:hover,
 .select-input:focus {
     border: 1px solid red;
     box-shadow: 0 0 15px red;

@@ -85,5 +85,5 @@ defined('EXIT__AUTO_MIN')      or define('EXIT__AUTO_MIN', 9); // lowest automat
 defined('EXIT__AUTO_MAX')      or define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 // custom constant (Konstanta)
-define("API", "http://localhost/TA-GAB2-Alphatech/Server/");
-define("APIHIDANGAN", API . "/index.php/Hidangan");
+define("API", "http://localhost/TA-GAB2-Alphatech/server");
+define("APIHIDANGAN", API."/index.php/Hidangan");

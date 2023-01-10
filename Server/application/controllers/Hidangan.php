@@ -19,15 +19,10 @@ class Hidangan extends Server
     // membuat fungsi GET
     function service_get()
     {
-        // ambil parameter token "(menu)"
         $token = $this->delete("menu");
 
         // test menggunakan menu
         $menu = $this->get('menu');
-
-        // panggil model Mhidangan
-        // model itu alias ketika di panggil
-        // $this->load->model("Mhidangan", "model", TRUE);
 
         if ($menu == '') {
             // panggil fungsi get_data
