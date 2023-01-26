@@ -14,7 +14,8 @@ class Hidangan extends CI_Controller
 		// 	# code...
 		// 	echo $result->nama_hidangan . "<br>";
 		// }
-
-		$this->load->view('v_hidangan', $data);
+		$this->load->view('admin/partials/header');
+		$this->load->view('admin/hidangan/v_hidangan', $data);
+		$this->load->view('admin/partials/footer');
 	}
 }
