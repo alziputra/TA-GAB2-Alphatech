@@ -13,11 +13,11 @@
         <div class="wrapper">
             <ul>
                 <li><a href="<?=site_url('dashboard/index')?>">Dashboard</a></li>
-                <li><a href="<?=base_url('kategori/index')?>">Kategori</a></li>
+                <li><a href="<?=site_url('kategori/index')?>">Kategori</a></li>
                 <li><a href="<?=site_url('Hidangan/index')?>">Menu Hidangan</a></li>
-                <li><a href="<?=base_url()?>">Pesanan</a></li>
-                <li><a href="<?=base_url()?>">Kelola Admin</a></li>
-                <li><a href="<?=base_url()?>">Logout</a></li>
+                <li><a href="<?=site_url()?>">Pesanan</a></li>
+                <li><a href="<?=site_url()?>">Kelola Admin</a></li>
+                <li><a href="<?=site_url()?>">Logout</a></li>
             </ul>
         </div>
     </nav>
