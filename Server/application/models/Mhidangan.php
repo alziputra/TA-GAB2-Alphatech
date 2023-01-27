@@ -10,7 +10,7 @@ class Mhidangan extends CI_Model
         $this->db->select("
             id AS id_hidangan,
             menu AS menu_hidangan,
-            deskripsi AS deskripsi hidangan,
+            deskripsi AS deskripsi_hidangan,
             harga AS harga_hidangan,
             aktif AS aktif_hidangan
         ");
