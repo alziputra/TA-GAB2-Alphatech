@@ -1,5 +1,5 @@
 <body>
-    <!-- BUAT AREA MENU -->
+    <!-- =======================area button======================= -->
     <nav class="area-button">
         <button id="btn_tambah" class="btn-primary">Add Data</button>
         <button id="btn_refresh" class="btn-secondary" onclick="return setRefresh()">Refresh Data</button>
@@ -9,7 +9,7 @@
     <table class="tbl-60">
         <thead>
             <tr>
-                <!-- judul tabel -->
+                <!-- =============judul tabel============= -->
                 <th style="width: 5%" ;>No.</th>
                 <th style="width: 20%" ;>Menu</th>
                 <th style="width: 15%" ;>Harga</th>
@@ -18,7 +18,7 @@
             </tr>
         </thead>
 
-        <!-- isi tabel -->
+        <!-- =====================isi tabel========================== -->
         <tbody>
         <!-- proses looping get data -->
         <?php
@@ -53,11 +53,59 @@
     <!-- import font awesome (js)-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js" integrity="sha512-naukR7I+Nk6gp7p5TMA4ycgfxaZBJ7MO5iC3Fp6ySQyKFHOGfpkSZkYVWV5R7u7cfAicxanwYQ5D1e17EfJcMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script>
-         // membuat function refresh
-         function setRefresh() {
+    <script>// inisialisasi object
+        let btn_tambah = document.getElementById("btn_tambah");
+
+        //=============================event button tambah=================================//
+        btn_tambah.addEventListener('click', function() {
+            location.href = '<?php echo site_url("Hidangan/addHidangan") ?>'
+        });
+
+        //=============================function refresh====================================//
+        function setRefresh() {
             location.href = '<?php echo base_url(); ?>';
         }
+
+        //===============================function update====================================//
+        function gotoUpdate(menu) {
+            
+            location.href = '<?php echo site_url("Hidangan/updateHidangan"); ?>' + '/' + menu;
+        }
+
+        //================================function delete===================================//
+        function gotoDelete(menu) {
+            if (confirm("Data Hidangan " + menu + " Ingin di Hapus?") === true) {
+                // alert("Data Berhasil di Hapus");
+
+                // panggil fungsi setDelete
+                setDelete(menu);
+            }
+        }
+
+        function setDelete(menu) {
+            // membuat variable / konstanta data
+            const data = {
+                "menuhidangan": menu
+            }
+            // kirim data async dengan fetch
+            fetch('<?php echo site_url("Hidangan/setDelete"); ?>', {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then((response) => {
+                    return response.json()
+                })
+                .then(function(data) {
+                    // menggunakan alert data dari Controller hidangan ambil dari statusnya
+                    alert(data.statusnya);
+                    // panggil fungsi setrefresh
+                    setRefresh();
+                })
+        }
+
     </script>
 
 </body>
