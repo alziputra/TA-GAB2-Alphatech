@@ -87,3 +87,4 @@ defined('EXIT__AUTO_MAX')      or define('EXIT__AUTO_MAX', 125); // highest auto
 // custom constant (Konstanta)
 define("API", "http://localhost/TA-GAB2-Alphatech/server");
 define("APIHIDANGAN", API."/index.php/Hidangan");
+define("APIKATEGORI", API."/index.php/Kategori");
