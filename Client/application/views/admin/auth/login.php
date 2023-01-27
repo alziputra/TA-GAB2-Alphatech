@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>Login - Restoran</title>
-        <link rel="stylesheet" href="<?php base_url ('ext/style.css')?>">
+        <link rel="stylesheet" href="<?php echo base_url ('ext/style.css')?>">
     </head>
 
     <body>
